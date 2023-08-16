@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Курсы валют и криптовалют</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <h2>Курсы валют и криптовалют</h2>
+    <table>
+        <tr>
+            <th>Валюта</th>
+            <th>Курс</th>
+        </tr>
+        <tr>
+            <td>USD</td>
+            <td id="usd-rate"></td>
+        </tr>
+        <tr>
+            <td>EUR</td>
+            <td id="eur-rate"></td>
+        </tr>
+        <tr>
+            <td>BTC</td>
+            <td id="btc-rate"></td>
+        </tr>
+        <tr>
+            <td>ETH</td>
+            <td id="eth-rate"></td>
+        </tr>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Обновление курсов валют и криптовалют
+        function updateRates() {
+            $.getJSON('get_rates.php', function(data) {
+                $('#usd-rate').text(data.usd);
+                $('#eur-rate').text(data.eur);
+                $('#btc-rate').text(data.btc);
+                $('#eth-rate').text(data.eth);
+            });
+        }
+
+        // Обновление курсов каждые 10 секунд
+        setInterval(updateRates, 10000);
+    </script>
+</body>
+</html>
